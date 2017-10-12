@@ -21,7 +21,10 @@
   "keywords": [
     "testcafe",
     "browser provider",
-    "plugin"
+    "plugin",
+    "CrossBrowserTesting.com",
+    "CrossBrowserTesting",
+    "CBT"
   ],
   "license": "MIT",
   "dependencies": {
