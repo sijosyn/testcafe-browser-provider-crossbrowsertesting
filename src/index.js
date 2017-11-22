@@ -19,6 +19,13 @@ const CBT_API_PATHS = {
     deleteTunnel: id => ({
         url:    `https://crossbrowsertesting.com/api/v3/tunnels/${id}`,
         method: 'DELETE'
+    }),
+    seleniumTestHistory: {
+        url: 'https://crossbrowsertesting.com/api/v3/selenium?active=true'
+    },
+    deleteBrowser: id => ({
+        url:    `https://crossbrowsertesting.com/api/v3/selenium/${id}`,
+        method: 'DELETE'
     })
 };
 
@@ -109,7 +116,7 @@ export default {
 
                 var capabilities;
 
-                if (browserName !== 'Chrome Mobile' || browserName !== 'Mobile Safari') {
+                if (browserName !== 'Chrome Mobile' && browserName !== 'Mobile Safari') {
                     capabilities = {
                         browserName: browserName,
                         version:     version,
@@ -144,11 +151,20 @@ export default {
     },
 
     async dispose () {
-        this.tunnelList = JSON.parse(await doRequest(CBT_API_PATHS.tunnelInfo));
+        this.seleniumHistoryList = JSON.parse(await doRequest(CBT_API_PATHS.seleniumTestHistory));
+        if (this.seleniumHistoryList.meta.record_count >= 1) {
+            for (let i = 0; i < this.seleniumHistoryList.meta.record_count; i++) {
+                this.seleniumTestID = this.seleniumHistoryList.selenium[i].selenium_test_id;
+                await doRequest(CBT_API_PATHS.deleteBrowser(this.seleniumTestID));
+            }
+        }
 
+        this.tunnelList = JSON.parse(await doRequest(CBT_API_PATHS.tunnelInfo));
         if (this.tunnelList.meta.record_count >= 1) {
-            this.tunnelID = this.tunnelList.tunnels[0].tunnel_id;
-            await doRequest(CBT_API_PATHS.deleteTunnel(this.tunnelID));
+            for (let i = 0; i < this.tunnelList.meta.record_count; i++) {
+                this.tunnelID = this.tunnelList.tunnels[i].tunnel_id;
+                await doRequest(CBT_API_PATHS.deleteTunnel(this.tunnelID));
+            }
         }
     },
 
