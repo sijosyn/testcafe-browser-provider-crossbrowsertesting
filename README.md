@@ -17,19 +17,20 @@ In Terminal mode, enter vi ~/.bash_profile, and then press Enter.
 Press i to insert text into your profile file.
 Enter these lines:
 ```
-export CBT_TUNNELS_USERNAME="your Sauce username/email address"
-export CBT_TUNNELS_AUTHKEY="your sauce access key"
+export CBT_TUNNELS_USERNAME="your crossbrowsertesting username/email address"
+export CBT_TUNNELS_AUTHKEY="your crossbrowsertesting auth key"
 ```
 Press Escape.
 Hold Shift and press Z twice (z z) to save your file and quit vi.
 In the terminal, enter source ~/.bash_profile.
 
-
+## Check available browsers
 You can determine the available browser aliases by running
 ```
 testcafe -b crossbrowsertesting
 ```
 
+## Run tests
 When you run tests from the command line, use the alias when specifying browsers:
 
 ```
