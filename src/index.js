@@ -122,7 +122,7 @@ export default {
                         version:     version,
                         platform:    platform
                     };
-                } 
+                }
                 else {
                     capabilities = {
                         browserName:     browserName,
@@ -131,7 +131,10 @@ export default {
                     };
                 }
 
+                // CrossBrowserTesting-Specific Capabilities
                 capabilities.name = `TestCafe test run ${id}`;
+                capabilities.build = process.env.CBT_TUNNELS_BUILD || null;
+                capabilities.record_video = (process.env.CBT_TUNNELS_RECORD_VIDEO || '').match(/true/i); // eslint-disable-line camelcase
 
                 await startBrowser(id, pageUrl, capabilities);
             }
