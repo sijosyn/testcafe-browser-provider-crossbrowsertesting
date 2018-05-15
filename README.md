@@ -48,5 +48,11 @@ testCafe
     .run();
 ```
 
+## Configuration
+
+Use the following environment variables to set additional configuration options:
+
+ - `CBT_MAX_DURATION` - By default, a test will have a maximum run time of 600 seconds (10 minutes). If you need more time you can change that by passing the max_duration capability along with a value.The highest value is 14400 seconds (4 hours). [More details](https://help.crossbrowsertesting.com/selenium-testing/faq/default-duration-selenium-test-timeout-information/)  
+
 ## Author
 Sijo Cheeran (https://synacor.com)
