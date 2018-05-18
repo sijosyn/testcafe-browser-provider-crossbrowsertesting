@@ -50,9 +50,12 @@ testCafe
 
 ## Configuration
 
-Use the following environment variables to set additional configuration options:
+Use the following environment variables to set additional [configuration options](https://help.crossbrowsertesting.com/selenium-testing/tutorials/crossbrowsertesting-automation-capabilities/):
 
- - `CBT_MAX_DURATION` - By default, a test will have a maximum run time of 600 seconds (10 minutes). If you need more time you can change that by passing the max_duration capability along with a value.The highest value is 14400 seconds (4 hours). [More details](https://help.crossbrowsertesting.com/selenium-testing/faq/default-duration-selenium-test-timeout-information/)  
+- `CBT_BUILD` - Number of the build within your test to get a high-level view of build performance.
+- `CBT_RECORD_VIDEO` - Start a video recording of your screen during the test session. (max length 10 minutes)
+- `CBT_RECORD_NETWORK` - Start a recording of your network packets during the test session.
+ - `CBT_MAX_DURATION` - By default, a test will have a maximum run time of 600 seconds (10 minutes). If you need more time you can change that by passing the max_duration capability along with a value.The highest value is 14400 seconds (4 hours). [More details](https://help.crossbrowsertesting.com/selenium-testing/faq/default-duration-selenium-test-timeout-information/)
 
 ## Author
 Sijo Cheeran (https://synacor.com)
