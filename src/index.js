@@ -8,8 +8,6 @@ import wd from 'wd';
 var openedBrowsers = {};
 var webDriver;
 
-const MAX_DURATION     = process.env['CBT_MAX_DURATION'];
-
 const AUTH_FAILED_ERROR = 'Authentication failed. Please assign the correct username and access key ' +
     'to the CBT_TUNNELS_USERNAME and CBT_TUNNELS_AUTHKEY environment variables.';
 
@@ -136,12 +134,13 @@ export default {
                 }
 
                 // CrossBrowserTesting-Specific Capabilities
-                if (MAX_DURATION)
-                    capabilities.max_duration = MAX_DURATION;
-
                 capabilities.name = `TestCafe test run ${id}`;
-                capabilities.build = process.env.CBT_TUNNELS_BUILD || null;
-                capabilities.record_video = (process.env.CBT_TUNNELS_RECORD_VIDEO || '').match(/true/i); // eslint-disable-line camelcase
+                if (process.env.CBT_BUILD)
+                    capabilities.build = process.env.CBT_BUILD;
+                if (process.env.CBT_RECORD_VIDEO)
+                    capabilities.record_video = process.env.CBT_RECORD_VIDEO.match(/true/i);
+                if (process.env.CBT_MAX_DURATION)
+                    capabilities.max_duration = process.env.CBT_MAX_DURATION;
 
                 await startBrowser(id, pageUrl, capabilities);
             }
