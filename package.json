@@ -1,6 +1,6 @@
 {
   "name": "testcafe-browser-provider-crossbrowsertesting",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "crossbrowsertesting TestCafe browser provider plugin.",
   "repository": "https://github.com/sijosyn/testcafe-browser-provider-crossbrowsertesting",
   "homepage": "https://github.com/sijosyn/testcafe-browser-provider-crossbrowsertesting",
@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.11.6",
-    "cbt_tunnels": "^0.9.3",
+    "cbt_tunnels": "^0.9.4",
     "lodash": "^4.17.4",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
