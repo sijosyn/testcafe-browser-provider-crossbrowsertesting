@@ -144,6 +144,9 @@ export default {
                 if (process.env.CBT_MAX_DURATION)
                     capabilities.max_duration = process.env.CBT_MAX_DURATION;
 
+                if (browserName.indexOf('Chrome') !== -1 && process.env.CBT_CHROME_ARGS && process.env.CBT_CHROME_ARGS.length > 0)
+                    capabilities.chromeOptions = { args: [process.env.CBT_CHROME_ARGS] };
+
                 await startBrowser(id, pageUrl, capabilities);
             }
 
