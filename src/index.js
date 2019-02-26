@@ -53,10 +53,14 @@ async function startBrowser (id, url, capabilities) {
     webDriver = wd.promiseChainRemote('hub.crossbrowsertesting.com', 80, process.env['CBT_TUNNELS_USERNAME'], process.env['CBT_TUNNELS_AUTHKEY']);
     openedBrowsers[id] = webDriver;
 
-    await webDriver
+    try {
+        await webDriver
         .init(capabilities)
         .get(url);
-
+    }
+    catch (error) {
+        throw error;
+    }
 }
 
 export default {
@@ -161,6 +165,9 @@ export default {
     // Optional - implement methods you need, remove other methods
     // Initialization
     async init () {
+        if (!process.env['CBT_TUNNELS_USERNAME'] || !process.env['CBT_TUNNELS_AUTHKEY'])
+            throw new Error(AUTH_FAILED_ERROR);
+
         await this._getDeviceList();
     },
 
@@ -193,8 +200,12 @@ export default {
 
 
     // Extra methods
-    async resizeWindow (/* id, width, height, currentWidth, currentHeight */) {
-        this.reportWarning('The window resize functionality is not supported by the "crossbrowsertesting" browser provider.');
+    async resizeWindow (id, width, height /*, currentWidth, currentHeight*/) {
+        await openedBrowsers[id].setWindowSize(width, height);
+    },
+
+    async maximizeWindow (id) {
+        await openedBrowsers[id].maximize();
     },
 
     async takeScreenshot (/* id, screenshotPath, pageWidth, pageHeight */) {
